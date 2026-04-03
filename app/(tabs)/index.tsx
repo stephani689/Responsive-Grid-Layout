@@ -1,98 +1,184 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React from 'react';
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  ScrollView, 
+  SafeAreaView, 
+  Image, 
+  TouchableOpacity 
+} from 'react-native';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
-
-export default function HomeScreen() {
+export default function TechGearsStore() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        
+        {/* --- HEADER --- */}
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>TechGears Store</Text>
+        </View>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+        {/* --- PRODUCT GRID - BARIS 1 --- */}
+        <View style={styles.row}>
+          {/* Produk 1: Speaker */}
+          <View style={styles.card}>
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>ON SALE</Text>
+            </View>
+            <Image 
+              source={require('../../assets/images/speaker.jpg')} 
+              style={styles.productImage} 
+            />
+            <View style={styles.infoContainer}>
+              <Text style={styles.productName}>Speaker Wireless</Text>
+              <Text style={styles.productPrice}>Rp 250.000</Text>
+            </View>
+            <TouchableOpacity style={styles.buyButton} activeOpacity={0.7}>
+              <Text style={styles.buyButtonText}>Beli</Text>
+            </TouchableOpacity>
+          </View>
+          
+          {/* Produk 2: Samsung */}
+          <View style={styles.card}>
+            <Image 
+              source={require('../../assets/images/handphone.jpg')} 
+              style={styles.productImage} 
+            />
+            <View style={styles.infoContainer}>
+              <Text style={styles.productName}>Samsung S25</Text>
+              <Text style={styles.productPrice}>Rp 15.000.000</Text>
+            </View>
+            <TouchableOpacity style={styles.buyButton} activeOpacity={0.7}>
+              <Text style={styles.buyButtonText}>Beli</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* --- PRODUCT GRID - BARIS 2 --- */}
+        <View style={styles.row}>
+          {/* Produk 3: Kipas */}
+          <View style={styles.card}>
+            <Image 
+              source={require('../../assets/images/kipas.jpg')} 
+              style={styles.productImage} 
+            />
+            <View style={styles.infoContainer}>
+              <Text style={styles.productName}>Kipas Portable</Text>
+              <Text style={styles.productPrice}>Rp 150.000</Text>
+            </View>
+            <TouchableOpacity style={styles.buyButton} activeOpacity={0.7}>
+              <Text style={styles.buyButtonText}>Beli</Text>
+            </TouchableOpacity>
+          </View>
+          
+          {/* Produk 4: Kipas Duduk */}
+          <View style={styles.card}>
+            <Image 
+              source={require('../../assets/images/kipas_duduk.png')} 
+              style={styles.productImage} 
+            />
+            <View style={styles.infoContainer}>
+              <Text style={styles.productName}>Kipas</Text>
+              <Text style={styles.productPrice}>Rp 180.000</Text>
+            </View>
+            <TouchableOpacity style={styles.buyButton} activeOpacity={0.7}>
+              <Text style={styles.buyButtonText}>Beli</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    flex: 1,
+    backgroundColor: '#e6f2ff', // Latar belakang biru muda
+  },
+  scrollContent: {
+    paddingBottom: 30,
+  },
+  header: {
+    height: 100,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
+    marginBottom: 25,
+    elevation: 4,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#004080',
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center', // Agar kartu kumpul di tengah
+    marginBottom: 15,
+  },
+  card: {
+    backgroundColor: '#fff',
+    width: 165, // Lebar kotak tetap agar stabil
+    height: 270, // Tinggi ditambah agar muat semua elemen
+    marginHorizontal: 8,
+    borderRadius: 20,
+    padding: 12,
+    alignItems: 'center',
+    justifyContent: 'space-between', // Memberi jarak merata atas-tengah-bawah
+    elevation: 5,
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  productImage: {
+    width: 90,
+    height: 90,
+    resizeMode: 'contain',
+    marginTop: 10,
+  },
+  infoContainer: {
+    alignItems: 'center',
+    marginVertical: 5,
+  },
+  productName: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#333',
+    textAlign: 'center',
+  },
+  productPrice: {
+    fontSize: 13,
+    color: '#004080',
+    fontWeight: '700',
+    marginTop: 4,
+  },
+  buyButton: {
+    backgroundColor: '#004080',
+    width: '100%',
+    paddingVertical: 10,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  buyButtonText: {
+    color: '#fff',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  badge: {
     position: 'absolute',
+    top: 10,
+    right: 10,
+    backgroundColor: '#ff4444',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+    zIndex: 10,
+  },
+  badgeText: {
+    color: 'white',
+    fontSize: 10,
+    fontWeight: 'bold',
   },
 });
